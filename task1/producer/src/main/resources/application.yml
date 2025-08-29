@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: producer
+  kafka:
+    bootstrap-servers: >
+      kz1-a-8e145ng5tj140l4q.mdb.yandexcloud.kz:9091,
+      kz1-a-r4qa30d4979gjqoe.mdb.yandexcloud.kz:9091,
+      kz1-a-vm4bn3g9pt8h4hc8.mdb.yandexcloud.kz:9091
+
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: SCRAM-SHA-512
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.scram.ScramLoginModule required
+        username="producer" password="producer-password";
+      ssl.truststore.type: JKS
+      ssl.truststore.location: C:/Users/maenlest/Desktop/work/task1/producer/yc-truststore.jks
+      ssl.truststore.password: capass
+      ssl.endpoint.identification.algorithm: HTTPS
+
+      schema.registry.url: >
+        https://kz1-a-8e145ng5tj140l4q.mdb.yandexcloud.kz:443,
+        https://kz1-a-r4qa30d4979gjqoe.mdb.yandexcloud.kz:443,
+        https://kz1-a-vm4bn3g9pt8h4hc8.mdb.yandexcloud.kz:443
+      basic.auth.credentials.source: USER_INFO
+      schema.registry.basic.auth.user.info: producer:producer-password
+      schema.registry.ssl.truststore.location: C:/Users/maenlest/Desktop/work/task1/producer/yc-truststore.jks
+      schema.registry.ssl.truststore.password: capass
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      acks: all

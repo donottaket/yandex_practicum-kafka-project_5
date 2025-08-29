@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: producer
+  kafka:
+    bootstrap-servers: kafka-broker-0:9092,kafka-broker-1:9092,kafka-broker-2:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
